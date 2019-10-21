@@ -38,7 +38,7 @@ public class Batalha {
 	
 	public void iniciar() throws Exception {
 		
-		idBatalha = api.post("iniciar", new JSONObject().append("nickname", nickname).toString(), null);
+		idBatalha = api.post("iniciar", nickname, null);
 		proximoPasso = "heroi";
 		if(idBatalha.contains("error")) {
 			System.out.println(idBatalha);
@@ -113,7 +113,7 @@ public class Batalha {
 		JSONArray json = new JSONArray(response);
 		List<String> ranking = new ArrayList<String>();
 		for (int i = 0; i < json.length(); i++) {
-			JSONObject posicao = json.getJSONObject(json.length()-1);
+			JSONObject posicao = json.getJSONObject(i);
 			ranking.add((i+1) + "º - " + posicao.getString("nickname") + " - " + posicao.getInt("pontuacao") + " pontos");
 		}
 		return ranking;
